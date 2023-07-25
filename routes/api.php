@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login',[\App\Http\Controllers\AuthController::class,'login']);
 
-Route::middleware('auth:sanctum')->group(function (){
     Route::get('authors',[\App\Http\Controllers\AuthorController::class,'list']);
     Route::get('authors/{author}',[\App\Http\Controllers\AuthorController::class, 'show']);
     Route::post('authors',[\App\Http\Controllers\AuthorController::class,'create']);
@@ -23,4 +22,4 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::post('clients',[\App\Http\Controllers\ClientController::class,'create']);
     Route::put('clients/{user}',[\App\Http\Controllers\ClientController::class,'update']);
     Route::delete('clients/{user}',[\App\Http\Controllers\ClientController::class,'delete']);
-});
+

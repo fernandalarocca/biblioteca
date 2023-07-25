@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AuthorResource;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -11,26 +12,44 @@ class AuthorController extends Controller
     {
         return Author::all();
     }
-    public function show($id)
+
+    public function show(Author $author)
     {
-        return Author::find($id);
+        return AuthorResource::make($author);
     }
+
     public function create(Request $request)
     {
+        $request->validate([
+            'first_name' => ['required', 'string', 'min:5', 'max:255'],
+            'last_name' => ['required', 'string', 'min:5', 'max:255'],
+            'age' => ['required', 'integer'],
+            'description' => ['required', 'string', 'min:6', 'max:255']
+        ]);
+
         $data = $request->all();
         $author = Author::make($data);
         $author->save();
-        return $author;
+
+        return AuthorResource::make($author);
     }
+
     public function update(Request $request, Author $author)
     {
+        $request->validate([
+            'first_name' => ['required', 'string', 'min:5', 'max:255'],
+            'last_name' => ['required', 'string', 'min:5', 'max:255'],
+            'age' => ['required', 'integer'],
+            'description' => ['required', 'string', 'min:6', 'max:255']
+        ]);
+
         $data = $request->all();
         $author->update($data);
-        return $author;
+        return AuthorResource::make($author);
     }
-    public function delete($id)
+
+    public function delete(Author $author)
     {
-        $author=Author::find($id);
         $author->delete();
         return $author;
     }
