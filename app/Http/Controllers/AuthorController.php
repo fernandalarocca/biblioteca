@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthorRequest;
 use App\Http\Resources\AuthorResource;
 use App\Models\Author;
-use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
@@ -18,32 +18,18 @@ class AuthorController extends Controller
         return AuthorResource::make($author);
     }
 
-    public function create(Request $request)
+    public function create(AuthorRequest $request)
     {
-        $request->validate([
-            'first_name' => ['required', 'string', 'min:5', 'max:255'],
-            'last_name' => ['required', 'string', 'min:5', 'max:255'],
-            'age' => ['required', 'integer'],
-            'description' => ['required', 'string', 'min:6', 'max:255']
-        ]);
-
-        $data = $request->all();
+        $data = $request->validated();
         $author = Author::make($data);
         $author->save();
 
         return AuthorResource::make($author);
     }
 
-    public function update(Request $request, Author $author)
+    public function update(AuthorRequest $request, Author $author)
     {
-        $request->validate([
-            'first_name' => ['required', 'string', 'min:5', 'max:255'],
-            'last_name' => ['required', 'string', 'min:5', 'max:255'],
-            'age' => ['required', 'integer'],
-            'description' => ['required', 'string', 'min:6', 'max:255']
-        ]);
-
-        $data = $request->all();
+        $data = $request->validated();
         $author->update($data);
         return AuthorResource::make($author);
     }
