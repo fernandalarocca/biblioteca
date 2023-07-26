@@ -12,7 +12,8 @@ class BookRequest extends FormRequest
             'synopsis' => ['required', 'string', 'min:10', 'max:255'],
             'category' => ['required', 'string', 'min:3', 'max:255'],
             'published_at' => ['required', 'date'],
-            'quantity_in_stock' => ['required', 'integer']
+            'quantity_in_stock' => ['required', 'integer'],
+            'author_id'=>['required', 'integer', 'exists:authors,id']
         ];
     }
 }
