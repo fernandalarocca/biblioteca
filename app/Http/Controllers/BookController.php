@@ -10,7 +10,8 @@ class BookController extends Controller
 {
     public function list()
     {
-        return Book::all();
+        $books = Book::all();
+        return BookResource::collection($books);
     }
 
     public function show(Book $book)
