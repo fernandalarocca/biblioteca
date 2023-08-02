@@ -13,7 +13,7 @@ class BookRequest extends FormRequest
             'category' => ['required', 'string', 'min:3', 'max:255'],
             'published_at' => ['required', 'date'],
             'quantity_in_stock' => ['required', 'integer'],
-            'author_id'=>['required', 'integer', 'exists:authors,id']
+            'author_id' => ['required', 'integer', 'exists:authors,id']
         ];
     }
 }

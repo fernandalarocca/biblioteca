@@ -23,3 +23,8 @@ Route::post('login',[\App\Http\Controllers\AuthController::class,'login']);
     Route::put('clients/{user}',[\App\Http\Controllers\ClientController::class,'update']);
     Route::delete('clients/{user}',[\App\Http\Controllers\ClientController::class,'delete']);
 
+    Route::get('loans',[\App\Http\Controllers\LoanController::class,'list']);
+    Route::get('loans/{loan}',[\App\Http\Controllers\LoanController::class,'show']);
+    Route::post('loans',[\App\Http\Controllers\LoanController::class,'create']);
+    Route::put('loans/{loan}',[\App\Http\Controllers\LoanController::class,'update']);
+    Route::delete('loans/{loan}',[\App\Http\Controllers\LoanController::class,'delete']);
