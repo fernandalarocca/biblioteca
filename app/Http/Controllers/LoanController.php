@@ -10,7 +10,8 @@ class LoanController extends Controller
 {
     public function list()
     {
-        $loans = Loan::all();
+        $perpage = request()->query('limit', 5);
+        $loans = Loan::query()->paginate($perpage);
         return LoanResource::collection($loans);
     }
 
