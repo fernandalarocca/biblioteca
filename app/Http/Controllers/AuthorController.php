@@ -10,7 +10,9 @@ class AuthorController extends Controller
 {
     public function list()
     {
-        return Author::all();
+        $perpage = request()->query('limit', 5);
+        $authors = Author::query()->paginate($perpage);
+        return AuthorResource::collection($authors);
     }
 
     public function show(Author $author)
@@ -23,7 +25,6 @@ class AuthorController extends Controller
         $data = $request->validated();
         $author = Author::make($data);
         $author->save();
-
         return AuthorResource::make($author);
     }
 

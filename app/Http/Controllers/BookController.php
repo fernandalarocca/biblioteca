@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
-use App\Models\Loan;
 
 class BookController extends Controller
 {
     public function list()
     {
         $perpage = request()->query('limit', 5);
-        $books = Loan::query()->paginate($perpage);
+        $books = Book::query()->paginate($perpage);
         return BookResource::collection($books);
     }
 

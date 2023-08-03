@@ -11,7 +11,9 @@ class ClientController extends Controller
 {
     public function list()
     {
-        return User::all();
+        $perpage = request()->query('limit', 5);
+        $users = User::query()->paginate($perpage);
+        return ClientResource::collection($users);
     }
 
     public function show(User $user)

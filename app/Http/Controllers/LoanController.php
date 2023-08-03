@@ -25,7 +25,6 @@ class LoanController extends Controller
         $data = $request->validated();
         $loan = Loan::make($data);
         $loan->save();
-
         return LoanResource::make($loan);
     }
 
