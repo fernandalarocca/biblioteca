@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Book;
 use Illuminate\Database\Eloquent\Model;
 
 class Loan extends Model
@@ -11,7 +12,6 @@ class Loan extends Model
         'book_id',
         'quantity'
     ];
-
     public function author()
     {
         return $this->belongsTo(Author::class, 'author_id', 'id');

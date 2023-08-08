@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoanRequest;
 use App\Http\Resources\LoanResource;
+use App\Models\Book;
 use App\Models\Loan;
 
 class LoanController extends Controller
@@ -25,6 +26,9 @@ class LoanController extends Controller
         $data = $request->validated();
         $loan = Loan::make($data);
         $loan->save();
+        $book = Book::find($data['book_id']);
+        $book->quantity_in_stock = $book->quantity_in_stock - $data['quantity'];
+        $book->save();
         return LoanResource::make($loan);
     }
 
