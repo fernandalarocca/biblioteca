@@ -10,7 +10,9 @@ class ClientRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:5', 'max:255'],
             'email' => ['required', 'string', 'min:5', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:6', 'max:255']
+            'password' => ['required', 'string', 'min:6', 'max:255'],
+            'is_admin' => ['required', 'boolean'],
+
         ];
     }
 }
