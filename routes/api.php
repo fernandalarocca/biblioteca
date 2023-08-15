@@ -40,5 +40,5 @@ Route::middleware(['auth:sanctum', 'role:client'])->prefix('client')->group(func
     Route::post('loans', [\App\Http\Controllers\LoanController::class, 'create']);
     Route::put('loans/{loan}', [\App\Http\Controllers\LoanController::class, 'update']);
 
-    Route::put('profile/{id}', [\App\Http\Controllers\ProfileController::class, 'update']);
+    Route::put('profile/{user}', [\App\Http\Controllers\ProfileController::class, 'update']);
 });

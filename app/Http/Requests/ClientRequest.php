@@ -9,7 +9,7 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-            $userId = optional($this->route())->id,
+            $userId = optional($this->route())->user,
             'name' => ['required', 'string', 'min:5', 'max:255'],
             'email' => [
                 'required',
