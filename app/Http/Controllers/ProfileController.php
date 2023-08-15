@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function update(ClientRequest $request, User $user)
+    public function update(ClientRequest $request, int $userId)
     {
+        $user = User::query()->find($userId);
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         $user->update($data);
