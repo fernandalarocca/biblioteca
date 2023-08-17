@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Client\CreateClientAction;
+use App\Actions\Client\UpdateClientAction;
 use App\Http\Requests\ClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
@@ -24,18 +25,14 @@ class ClientController extends Controller
     public function create(ClientRequest $request)
     {
         $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
-        $user = User::make($data);
-        $user->save();
-
+        $user = (new CreateClientAction())->execute($data);
         return ClientResource::make($user);
     }
 
     public function update(ClientRequest $request, User $user)
     {
         $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
-        $user->update($data);
+        $user = (new UpdateClientAction())->execute($data, $user);
         return ClientResource::make($user);
     }
 
