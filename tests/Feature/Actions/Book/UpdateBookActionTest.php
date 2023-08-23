@@ -18,7 +18,7 @@ class UpdateBookTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'age' => 30,
-            'description' => 'Um autor fictício para teste.',
+            'description' => 'Um autor fictício para teste.'
         ]);
 
         $data = [
