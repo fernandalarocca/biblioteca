@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Models\Book;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Loan extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'author_id',
         'book_id',

@@ -13,12 +13,9 @@ class LoanFactory extends Factory
 
     public function definition()
     {
-        $author = Author::factory()->create();
-        $book = Book::factory()->create();
-
         return [
-            'author_id' => $author->id,
-            'book_id' => $book->id,
+            'author_id' => Author::factory(),
+            'book_id' =>Book::factory(),
             'quantity' => $this->faker->randomNumber(1),
         ];
     }

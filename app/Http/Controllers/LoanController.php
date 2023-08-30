@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Book\UpdateBookQuantityInStockAction;
+use App\Actions\Loan\CreateLoanAction;
 use App\Http\Requests\LoanRequest;
 use App\Http\Resources\LoanResource;
 use App\Models\Book;
@@ -24,11 +26,12 @@ class LoanController extends Controller
     public function create(LoanRequest $request)
     {
         $data = $request->validated();
-        $loan = Loan::make($data);
-        $loan->save();
-        $book = Book::find($data['book_id']);
-        $book->quantity_in_stock = $book->quantity_in_stock - $data['quantity'];
-        $book->save();
+        $loan = (new CreateLoanAction())->execute($data);
+
+        $book = app(Book::class)->find($loan->book_id);
+        (new UpdateBookQuantityInStockAction())
+            ->execute($book, data_get($data,'quantity', 1));
+
         return LoanResource::make($loan);
     }
 
