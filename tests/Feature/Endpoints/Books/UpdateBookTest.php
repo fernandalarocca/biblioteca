@@ -3,6 +3,7 @@
 namespace Feature\Endpoints\Books;
 
 use App\Models\Author;
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -13,12 +14,7 @@ class UpdateBookTest extends TestCase
 
     public function test_should_updated_book_success()
     {
-        $author = Author::create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'age' => 30,
-            'description' => 'Um autor fictício para teste.',
-        ]);
+        $author = Author::factory()->create();
 
         $payload = [
             'title' => 'Aristóteles e Dante descobrem os segredos do universo',
@@ -38,12 +34,7 @@ class UpdateBookTest extends TestCase
 
     public function test_should_updated_book_with_error_validation()
     {
-        $author = Author::create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'age' => 30,
-            'description' => 'Um autor fictício para teste.',
-        ]);
+        $author = Author::factory()->create();
 
         $payload = [
             'title' => 'Aristóteles e Dante descobrem os segredos do universo',

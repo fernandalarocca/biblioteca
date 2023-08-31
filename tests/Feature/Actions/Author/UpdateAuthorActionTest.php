@@ -3,7 +3,7 @@
 namespace Tests\Feature\Actions\Author;
 
 use App\Actions\Author\UpdateAuthorAction;
-use Database\Factories\AuthorFactory;
+use App\Models\Author;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,11 +19,11 @@ class UpdateAuthorTest extends TestCase
             'age' => 25,
             'description' => 'Gosta de vinho tinto e não sabe dançar. Escreve as coisas que queria ter lido.'
         ];
-        $author = AuthorFactory::new()->create();
 
-        $author = (new UpdateAuthorAction())->execute($data, $author);
+        $authorOld = Author::factory()->create();
+        $authorNew = (new UpdateAuthorAction())->execute($data, $authorOld);
 
-        $this->assertNotNull($author->id);
+        $this->assertEquals($authorOld->id, $authorNew->id);
         $this->assertDatabaseHas('authors', [
             'first_name' => 'Elayne',
             'last_name' => 'Baeta',

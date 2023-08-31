@@ -13,13 +13,7 @@ class CreateBookTest extends TestCase
 
     public function test_should_created_book_success()
     {
-        $author = Author::create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'age' => 30,
-            'description' => 'Um autor fictício para teste.',
-        ]);
-
+        $author = Author::factory()->create();
         $data = [
             'title' => 'Aristóteles e Dante descobrem os segredos do universo',
             'synopsis' => 'Em um verão tedioso, os jovens Aristóteles e Dante são unidos pelo acaso e, embora sejam completamente diferentes um do outro, iniciam uma amizade especial, do tipo que muda a vida das pessoas e dura para sempre.',

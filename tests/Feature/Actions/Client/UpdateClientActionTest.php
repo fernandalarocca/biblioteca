@@ -18,12 +18,12 @@ class UpdateClientTest extends TestCase
             'email' => 'teste@email.com',
             'password' => '12345678'
         ];
-        $user = User::factory()->create();
 
-        $user = (new UpdateClientAction())->execute($data, $user);
+        $userOld = User::factory()->create();
+        $userNew = (new UpdateClientAction())->execute($data, $userOld);
 
-        $this->assertNotNull($user->id);
-        $this->assertTrue(Hash::check($data['password'],$user->password));
+        $this->assertNotNull($userOld->id, $userNew->id);
+        $this->assertTrue(Hash::check($data['password'],$userNew->password));
         $this->assertDatabaseHas('users', [
             'name' => 'teste',
             'email' => 'teste@email.com'

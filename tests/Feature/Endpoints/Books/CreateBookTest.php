@@ -38,12 +38,7 @@ class CreateBookTest extends TestCase
 
     public function test_should_created_book_with_error_validation()
     {
-        $author = Author::create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'age' => 30,
-            'description' => 'Um autor fictício para teste.',
-        ]);
+        $author = Author::factory()->create();
 
         $payload = [
             'title' => 'Aristóteles e Dante descobrem os segredos do universo',
