@@ -1,0 +1,1145 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:8000"
+        }
+    ],
+    "info": {
+        "name": "Biblioteca API",
+        "_postman_id": "cf3ceb9d-a0ab-429e-b693-0369e73eb287",
+        "description": "Biblioteca API",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "M\u00e9todo de login.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"admin@email.com\",\"password\":\"12345678\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"token\": \"7|BsB4L6b8pbtazpCfPAEOzdr9HKs1bBpICuYq1i0c\"\n }",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\": \"email ou senha incorretos\"}",
+                            "name": "user not authenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar autores",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/authors",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/authors"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar todos os autores"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/authors?page=1\",\n        \"last\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/authors?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/authors?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/authors\",\n        \"per_page\": 5,\n        \"to\": 1,\n        \"total\": 1\n    }\n}\n",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\":\"Not found.\"\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Visualizar autor",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/authors\/:author_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/authors\/:author_id",
+                            "variable": [
+                                {
+                                    "id": "author_id",
+                                    "key": "author_id",
+                                    "value": "17",
+                                    "description": "The ID of the author."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar um \u00fanico autor"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 17,\n        \"first_name\": \"Benjamin\",\n        \"last_name\": \"Alire S\u00e1enz\",\n        \"age\": 68,\n        \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n        \"created_at\": \"06\\\/09\\\/2023 17:34\",\n        \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Criar autor",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/authors",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/authors"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"first_name\":\"Taylor\",\"last_name\":\"Jenkins Reid\",\"age\":39,\"description\":\"\u00c9 conhecida por seus livros Os Sete Maridos de Evelyn Hugo, Daisy Jones & The Six e Malibu Renasce.\"}"
+                        },
+                        "description": "Endpoint para criar um autor"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 17,\n        \"first_name\": \"Benjamin\",\n        \"last_name\": \"Alire S\u00e1enz\",\n        \"age\": 68,\n        \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n        \"created_at\": \"06\\\/09\\\/2023 17:34\",\n        \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Editar autor",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/authors\/:author_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/authors\/:author_id",
+                            "variable": [
+                                {
+                                    "id": "author_id",
+                                    "key": "author_id",
+                                    "value": "17",
+                                    "description": "The ID of the author."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"first_name\":\"Benjamin\",\"last_name\":\"Alire S\u00e1enz\",\"age\":18,\"description\":\"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos.\"}"
+                        },
+                        "description": "Endpoint para editar um autor"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 17,\n        \"first_name\": \"Benjamin\",\n        \"last_name\": \"Alire S\u00e1enz\",\n        \"age\": 68,\n        \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n        \"created_at\": \"06\\\/09\\\/2023 17:34\",\n        \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Deletar autor",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/authors\/:author_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/authors\/:author_id",
+                            "variable": [
+                                {
+                                    "id": "author_id",
+                                    "key": "author_id",
+                                    "value": "17",
+                                    "description": "The ID of the author."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para deletar um autor"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 17,\n        \"first_name\": \"Benjamin\",\n        \"last_name\": \"Alire S\u00e1enz\",\n        \"age\": 68,\n        \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n        \"created_at\": \"06\\\/09\\\/2023 17:34\",\n        \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar livros",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/books",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/books"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar todos os livros"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": 11,\n            \"title\": \"Evelyn Hugo\",\n            \"synopsis\": \"TESTEeeeeeeeeeeee\",\n            \"category\": \"Romance\",\n            \"published_at\": \"2019-11-05\",\n            \"quantity_in_stock\": 1,\n            \"created_at\": \"06\\\/09\\\/2023 17:45\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:51\",\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/books?page=1\",\n        \"last\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/books?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/books?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/books\",\n        \"per_page\": 5,\n        \"to\": 1,\n        \"total\": 1\n    }\n}\n",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\":\"Not found.\"\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Visualizar livro",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/books\/:book_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/books\/:book_id",
+                            "variable": [
+                                {
+                                    "id": "book_id",
+                                    "key": "book_id",
+                                    "value": "11",
+                                    "description": "The ID of the book."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar um \u00fanico livro"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 11,\n        \"title\": \"Evelyn Hugo\",\n        \"synopsis\": \"TESTEeeeeeeeeeeee\",\n        \"category\": \"Romance\",\n        \"published_at\": \"2019-11-05\",\n        \"quantity_in_stock\": 1,\n        \"created_at\": \"06\\\/09\\\/2023 17:45\",\n        \"updated_at\": \"06\\\/09\\\/2023 17:51\",\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        }\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Criar livro",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/books",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/books"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"title\":\"Os Sete Maridos de Evelyn Hugo\",\"synopsis\":\"uma das maiores estrelas de Hollywood, agora a aproximar-se dos 80 anos, decide finalmente contar tudo sobre a sua vida.\",\"category\":\"Romance\",\"published_at\":\"2017-06-13\",\"quantity_in_stock\":3,\"author_id\":1}"
+                        },
+                        "description": "Endpoint para criar um livro"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 12,\n        \"title\": \"Os Sete Maridos de Evelyn Hugo\",\n        \"synopsis\": \"sinopse de teste\",\n        \"category\": \"Romance\",\n        \"published_at\": \"2019-11-05\",\n        \"quantity_in_stock\": 3,\n        \"created_at\": \"11\\\/09\\\/2023 17:18\",\n        \"updated_at\": \"11\\\/09\\\/2023 17:18\",\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        }\n    }\n}\n",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The title has already been taken.\",\n    \"errors\": {\n        \"title\": [\n            \"The title has already been taken.\"\n        ]\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Editar livro",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/books\/:book_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/books\/:book_id",
+                            "variable": [
+                                {
+                                    "id": "book_id",
+                                    "key": "book_id",
+                                    "value": "11",
+                                    "description": "The ID of the book."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"title\":\"Os Sete Maridos de Evelyn Hugo\",\"synopsis\":\"uma das maiores estrelas de Hollywood, agora a aproximar-se dos 80 anos, decide finalmente contar tudo sobre a sua vida.\",\"category\":\"Romance\",\"published_at\":\"2017-06-13\",\"quantity_in_stock\":3,\"author_id\":1}"
+                        },
+                        "description": "Endpoint para editar um livro"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 12,\n        \"title\": \"Pequeno Pr\u00edncipe\",\n        \"synopsis\": \"Um piloto cai com seu avi\u00e3o no deserto e ali encontra uma crian\u00e7a loura e fr\u00e1gil. Ela diz ter vindo de um pequeno planeta distante. E ali, na conviv\u00eancia com o piloto perdido, os dois repensam os seus valores e encontram o sentido da vida.\",\n        \"category\": \"Infantojuvenil\",\n        \"published_at\": \"1943-04-06\",\n        \"quantity_in_stock\": 2,\n        \"created_at\": \"11\\\/09\\\/2023 17:18\",\n        \"updated_at\": \"11\\\/09\\\/2023 17:20\",\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        }\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Deletar livro",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/books\/:book_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/books\/:book_id",
+                            "variable": [
+                                {
+                                    "id": "book_id",
+                                    "key": "book_id",
+                                    "value": "11",
+                                    "description": "The ID of the book."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para deletar um livro"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"id\": 12,\n    \"title\": \"Pequeno Pr\u00edncipe\",\n    \"synopsis\": \"Um piloto cai com seu avi\u00e3o no deserto e ali encontra uma crian\u00e7a loura e fr\u00e1gil. Ela diz ter vindo de um pequeno planeta distante. E ali, na conviv\u00eancia com o piloto perdido, os dois repensam os seus valores e encontram o sentido da vida.\",\n    \"category\": \"Infantojuvenil\",\n    \"published_at\": \"1943-04-06\",\n    \"quantity_in_stock\": 2,\n    \"created_at\": \"2023-09-11T17:18:48.000000Z\",\n    \"updated_at\": \"2023-09-11T17:20:08.000000Z\",\n    \"author_id\": 17\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar usu\u00e1rios",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/clients",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/clients"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar todos os usu\u00e1rios"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": 19,\n            \"name\": \"Administrador\",\n            \"email\": \"admin@email.com\",\n            \"type\": \"ADMIN\",\n            \"0\": \"06\\\/09\\\/2023 17:31\",\n            \"1\": \"06\\\/09\\\/2023 17:31\"\n        },\n        {\n            \"id\": 20,\n            \"name\": \"Cliente\",\n            \"email\": \"client@email.com\",\n            \"type\": \"CLIENT\",\n            \"0\": \"06\\\/09\\\/2023 17:31\",\n            \"1\": \"06\\\/09\\\/2023 17:31\"\n        },\n        {\n            \"id\": 22,\n            \"name\": \"Fernanda Larocca Cola\u00e7o\",\n            \"email\": \"teste@email.com\",\n            \"type\": \"CLIENT\",\n            \"0\": \"06\\\/09\\\/2023 17:47\",\n            \"1\": \"06\\\/09\\\/2023 17:53\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/clients?page=1\",\n        \"last\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/clients?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/clients?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/clients\",\n        \"per_page\": 5,\n        \"to\": 3,\n        \"total\": 3\n    }\n}\n",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\":\"Not found.\"\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Visualizar usu\u00e1rio",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/clients\/:user_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/clients\/:user_id",
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "19",
+                                    "description": "The ID of the user."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar um \u00fanico usu\u00e1rio"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 23,\n        \"name\": \"Teste\",\n        \"email\": \"teste1@email.com\",\n        \"type\": \"CLIENT\",\n        \"0\": \"11\\\/09\\\/2023 17:37\",\n        \"1\": \"11\\\/09\\\/2023 17:41\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Criar usu\u00e1rio",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/clients",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/clients"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Usu\u00e1rio Teste\",\"email\":\"teste1@email.com\",\"password\":\"12345678\",\"is_admin\":false}"
+                        },
+                        "description": "Endpoint para criar um usu\u00e1rio"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 23,\n        \"name\": \"Usu\u00e1rio Teste\",\n        \"email\": \"teste1@email.com\",\n        \"type\": \"CLIENT\",\n        \"0\": \"11\\\/09\\\/2023 17:37\",\n        \"1\": \"11\\\/09\\\/2023 17:37\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Editar usu\u00e1rio",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/clients\/:user_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/clients\/:user_id",
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "19",
+                                    "description": "The ID of the user."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Teste\",\"email\":\"teste1@email.com\",\"password\":\"12345678\",\"is_admin\":false}"
+                        },
+                        "description": "Endpoint para editar um usu\u00e1rio"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 23,\n        \"name\": \"Teste\",\n        \"email\": \"teste1@email.com\",\n        \"type\": \"CLIENT\",\n        \"0\": \"11\\\/09\\\/2023 17:37\",\n        \"1\": \"11\\\/09\\\/2023 17:41\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Deletar usu\u00e1rio",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/clients\/:user_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/clients\/:user_id",
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "19",
+                                    "description": "The ID of the user."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para deletar um usu\u00e1rio"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"id\": 23,\n    \"name\": \"Teste\",\n    \"email\": \"teste1@email.com\",\n    \"created_at\": \"2023-09-11T17:37:26.000000Z\",\n    \"updated_at\": \"2023-09-11T17:41:33.000000Z\",\n    \"is_admin\": false\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar empr\u00e9stimos",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/loans",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/loans"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar todos os empr\u00e9stimos"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": 5,\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            },\n            \"book\": {\n                \"id\": 11,\n                \"title\": \"Evelyn Hugo\",\n                \"synopsis\": \"TESTEeeeeeeeeeeee\",\n                \"category\": \"Romance\",\n                \"published_at\": \"2019-11-05\",\n                \"quantity_in_stock\": 0,\n                \"created_at\": \"06\\\/09\\\/2023 17:45\",\n                \"updated_at\": \"11\\\/09\\\/2023 17:59\",\n                \"author\": {\n                    \"id\": 17,\n                    \"first_name\": \"Benjamin\",\n                    \"last_name\": \"Alire S\u00e1enz\",\n                    \"age\": 68,\n                    \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                    \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                    \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n                }\n            },\n            \"created_at\": \"06\\\/09\\\/2023 17:51\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:51\"\n        },\n        {\n            \"id\": 6,\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            },\n            \"book\": {\n                \"id\": 11,\n                \"title\": \"Evelyn Hugo\",\n                \"synopsis\": \"TESTEeeeeeeeeeeee\",\n                \"category\": \"Romance\",\n                \"published_at\": \"2019-11-05\",\n                \"quantity_in_stock\": 0,\n                \"created_at\": \"06\\\/09\\\/2023 17:45\",\n                \"updated_at\": \"11\\\/09\\\/2023 17:59\",\n                \"author\": {\n                    \"id\": 17,\n                    \"first_name\": \"Benjamin\",\n                    \"last_name\": \"Alire S\u00e1enz\",\n                    \"age\": 68,\n                    \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                    \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                    \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n                }\n            },\n            \"created_at\": \"11\\\/09\\\/2023 17:59\",\n            \"updated_at\": \"11\\\/09\\\/2023 17:59\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/loans?page=1\",\n        \"last\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/loans?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/loans?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/loans\",\n        \"per_page\": 5,\n        \"to\": 2,\n        \"total\": 2\n    }\n}\n",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\":\"Not found.\"\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Visualizar empr\u00e9stimo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/loans\/:loan_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/loans\/:loan_id",
+                            "variable": [
+                                {
+                                    "id": "loan_id",
+                                    "key": "loan_id",
+                                    "value": "5",
+                                    "description": "The ID of the loan."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar um \u00fanico empr\u00e9stimo"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 5,\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        },\n        \"book\": {\n            \"id\": 11,\n            \"title\": \"Evelyn Hugo\",\n            \"synopsis\": \"TESTEeeeeeeeeeeee\",\n            \"category\": \"Romance\",\n            \"published_at\": \"2019-11-05\",\n            \"quantity_in_stock\": 0,\n            \"created_at\": \"06\\\/09\\\/2023 17:45\",\n            \"updated_at\": \"11\\\/09\\\/2023 17:59\",\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            }\n        },\n        \"created_at\": \"06\\\/09\\\/2023 17:51\",\n        \"updated_at\": \"06\\\/09\\\/2023 17:51\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Criar empr\u00e9stimo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/loans",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/loans"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"author_id\":1,\"book_id\":2,\"quantity\":1}"
+                        },
+                        "description": "Endpoint para criar um empr\u00e9stimo"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 6,\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        },\n        \"book\": {\n            \"id\": 11,\n            \"title\": \"Evelyn Hugo\",\n            \"synopsis\": \"TESTEeeeeeeeeeeee\",\n            \"category\": \"Romance\",\n            \"published_at\": \"2019-11-05\",\n            \"quantity_in_stock\": 0,\n            \"created_at\": \"06\\\/09\\\/2023 17:45\",\n            \"updated_at\": \"11\\\/09\\\/2023 17:59\",\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            }\n        },\n        \"created_at\": \"11\\\/09\\\/2023 17:59\",\n        \"updated_at\": \"11\\\/09\\\/2023 17:59\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Editar empr\u00e9stimo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/loans\/:loan_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/loans\/:loan_id",
+                            "variable": [
+                                {
+                                    "id": "loan_id",
+                                    "key": "loan_id",
+                                    "value": "5",
+                                    "description": "The ID of the loan."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"author_id\":1,\"book_id\":2,\"quantity\":2}"
+                        },
+                        "description": "Endpoint para editar um empr\u00e9stimo"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 7,\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        },\n        \"book\": {\n            \"id\": 13,\n            \"title\": \"Evelyn Hugooo\",\n            \"synopsis\": \"sinopse de teste\",\n            \"category\": \"Romance\",\n            \"published_at\": \"2019-11-05\",\n            \"quantity_in_stock\": 2,\n            \"created_at\": \"11\\\/09\\\/2023 18:01\",\n            \"updated_at\": \"11\\\/09\\\/2023 18:01\",\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            }\n        },\n        \"created_at\": \"11\\\/09\\\/2023 18:01\",\n        \"updated_at\": \"11\\\/09\\\/2023 18:02\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Deletar empr\u00e9stimo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/admin\/loans\/:loan_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/admin\/loans\/:loan_id",
+                            "variable": [
+                                {
+                                    "id": "loan_id",
+                                    "key": "loan_id",
+                                    "value": "5",
+                                    "description": "The ID of the loan."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para deletar um empr\u00e9stimo"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"id\": 7,\n    \"author_id\": 17,\n    \"book_id\": 13,\n    \"quantity\": 2,\n    \"created_at\": \"2023-09-11T18:01:59.000000Z\",\n    \"updated_at\": \"2023-09-11T18:02:17.000000Z\"\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar livros",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/client\/books",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/client\/books"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar todos os livros"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": 11,\n            \"title\": \"Evelyn Hugo\",\n            \"synopsis\": \"TESTEeeeeeeeeeeee\",\n            \"category\": \"Romance\",\n            \"published_at\": \"2019-11-05\",\n            \"quantity_in_stock\": 1,\n            \"created_at\": \"06\\\/09\\\/2023 17:45\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:51\",\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/books?page=1\",\n        \"last\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/books?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/books?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/books\",\n        \"per_page\": 5,\n        \"to\": 1,\n        \"total\": 1\n    }\n}\n",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\":\"Not found.\"\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Visualizar livro",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/client\/books\/:book_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/client\/books\/:book_id",
+                            "variable": [
+                                {
+                                    "id": "book_id",
+                                    "key": "book_id",
+                                    "value": "11",
+                                    "description": "The ID of the book."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar um \u00fanico livro"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 11,\n        \"title\": \"Evelyn Hugo\",\n        \"synopsis\": \"TESTEeeeeeeeeeeee\",\n        \"category\": \"Romance\",\n        \"published_at\": \"2019-11-05\",\n        \"quantity_in_stock\": 1,\n        \"created_at\": \"06\\\/09\\\/2023 17:45\",\n        \"updated_at\": \"06\\\/09\\\/2023 17:51\",\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        }\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar empr\u00e9stimos",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/client\/loans",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/client\/loans"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar todos os empr\u00e9stimos"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": 5,\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            },\n            \"book\": {\n                \"id\": 11,\n                \"title\": \"Evelyn Hugo\",\n                \"synopsis\": \"TESTEeeeeeeeeeeee\",\n                \"category\": \"Romance\",\n                \"published_at\": \"2019-11-05\",\n                \"quantity_in_stock\": 0,\n                \"created_at\": \"06\\\/09\\\/2023 17:45\",\n                \"updated_at\": \"11\\\/09\\\/2023 17:59\",\n                \"author\": {\n                    \"id\": 17,\n                    \"first_name\": \"Benjamin\",\n                    \"last_name\": \"Alire S\u00e1enz\",\n                    \"age\": 68,\n                    \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                    \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                    \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n                }\n            },\n            \"created_at\": \"06\\\/09\\\/2023 17:51\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:51\"\n        },\n        {\n            \"id\": 6,\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            },\n            \"book\": {\n                \"id\": 11,\n                \"title\": \"Evelyn Hugo\",\n                \"synopsis\": \"TESTEeeeeeeeeeeee\",\n                \"category\": \"Romance\",\n                \"published_at\": \"2019-11-05\",\n                \"quantity_in_stock\": 0,\n                \"created_at\": \"06\\\/09\\\/2023 17:45\",\n                \"updated_at\": \"11\\\/09\\\/2023 17:59\",\n                \"author\": {\n                    \"id\": 17,\n                    \"first_name\": \"Benjamin\",\n                    \"last_name\": \"Alire S\u00e1enz\",\n                    \"age\": 68,\n                    \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                    \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                    \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n                }\n            },\n            \"created_at\": \"11\\\/09\\\/2023 17:59\",\n            \"updated_at\": \"11\\\/09\\\/2023 17:59\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/loans?page=1\",\n        \"last\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/loans?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/loans?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http:\\\/\\\/127.0.0.1:8000\\\/api\\\/admin\\\/loans\",\n        \"per_page\": 5,\n        \"to\": 2,\n        \"total\": 2\n    }\n}\n",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\":\"Not found.\"\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Visualizar empr\u00e9stimo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/client\/loans\/:loan_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/client\/loans\/:loan_id",
+                            "variable": [
+                                {
+                                    "id": "loan_id",
+                                    "key": "loan_id",
+                                    "value": "5",
+                                    "description": "The ID of the loan."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint para listar um \u00fanico empr\u00e9stimo"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 5,\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        },\n        \"book\": {\n            \"id\": 11,\n            \"title\": \"Evelyn Hugo\",\n            \"synopsis\": \"TESTEeeeeeeeeeeee\",\n            \"category\": \"Romance\",\n            \"published_at\": \"2019-11-05\",\n            \"quantity_in_stock\": 0,\n            \"created_at\": \"06\\\/09\\\/2023 17:45\",\n            \"updated_at\": \"11\\\/09\\\/2023 17:59\",\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            }\n        },\n        \"created_at\": \"06\\\/09\\\/2023 17:51\",\n        \"updated_at\": \"06\\\/09\\\/2023 17:51\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Criar empr\u00e9stimo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/client\/loans",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/client\/loans"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"author_id\":1,\"book_id\":2,\"quantity\":1}"
+                        },
+                        "description": "Endpoint para criar um empr\u00e9stimo"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 6,\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        },\n        \"book\": {\n            \"id\": 11,\n            \"title\": \"Evelyn Hugo\",\n            \"synopsis\": \"TESTEeeeeeeeeeeee\",\n            \"category\": \"Romance\",\n            \"published_at\": \"2019-11-05\",\n            \"quantity_in_stock\": 0,\n            \"created_at\": \"06\\\/09\\\/2023 17:45\",\n            \"updated_at\": \"11\\\/09\\\/2023 17:59\",\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            }\n        },\n        \"created_at\": \"11\\\/09\\\/2023 17:59\",\n        \"updated_at\": \"11\\\/09\\\/2023 17:59\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Editar empr\u00e9stimo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/client\/loans\/:loan_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/client\/loans\/:loan_id",
+                            "variable": [
+                                {
+                                    "id": "loan_id",
+                                    "key": "loan_id",
+                                    "value": "5",
+                                    "description": "The ID of the loan."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"author_id\":1,\"book_id\":2,\"quantity\":2}"
+                        },
+                        "description": "Endpoint para editar um empr\u00e9stimo"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 7,\n        \"author\": {\n            \"id\": 17,\n            \"first_name\": \"Benjamin\",\n            \"last_name\": \"Alire S\u00e1enz\",\n            \"age\": 68,\n            \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n            \"created_at\": \"06\\\/09\\\/2023 17:34\",\n            \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n        },\n        \"book\": {\n            \"id\": 13,\n            \"title\": \"Evelyn Hugooo\",\n            \"synopsis\": \"sinopse de teste\",\n            \"category\": \"Romance\",\n            \"published_at\": \"2019-11-05\",\n            \"quantity_in_stock\": 2,\n            \"created_at\": \"11\\\/09\\\/2023 18:01\",\n            \"updated_at\": \"11\\\/09\\\/2023 18:01\",\n            \"author\": {\n                \"id\": 17,\n                \"first_name\": \"Benjamin\",\n                \"last_name\": \"Alire S\u00e1enz\",\n                \"age\": 68,\n                \"description\": \"Nasceu em 1954, no Novo M\u00e9xico, Estados Unidos. \u00c9 chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.\",\n                \"created_at\": \"06\\\/09\\\/2023 17:34\",\n                \"updated_at\": \"06\\\/09\\\/2023 17:34\"\n            }\n        },\n        \"created_at\": \"11\\\/09\\\/2023 18:01\",\n        \"updated_at\": \"11\\\/09\\\/2023 18:02\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Editar perfil",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/client\/profile\/:user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/client\/profile\/:user",
+                            "variable": [
+                                {
+                                    "id": "user",
+                                    "key": "user",
+                                    "value": "et",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Jo\u00e3o da Silva\",\"email\":\"teste@email.com\",\"password\":12345678,\"is_admin\":false}"
+                        },
+                        "description": "Endpoint para editar o perfil do usu\u00e1rio"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"id\": 22,\n        \"name\": \"Fernanda Larocca Cola\u00e7o\",\n        \"email\": \"teste@email.com\",\n        \"type\": \"CLIENT\",\n        \"0\": \"06\\\/09\\\/2023 17:47\",\n        \"1\": \"11\\\/09\\\/2023 18:07\"\n    }\n}\n",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "key",
+                "type": "string"
+            }
+        ]
+    }
+}

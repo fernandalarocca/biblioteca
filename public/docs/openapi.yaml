@@ -1,0 +1,3530 @@
+openapi: 3.0.3
+info:
+  title: 'Biblioteca API'
+  description: 'Biblioteca API'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+paths:
+  /api/login:
+    post:
+      summary: 'Método de login.'
+      operationId: mtodoDeLogin
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  token: 7|BsB4L6b8pbtazpCfPAEOzdr9HKs1bBpICuYq1i0c
+                properties:
+                  token:
+                    type: string
+                    example: 7|BsB4L6b8pbtazpCfPAEOzdr9HKs1bBpICuYq1i0c
+        404:
+          description: 'user not authenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'email ou senha incorretos'
+                properties:
+                  message:
+                    type: string
+                    example: 'email ou senha incorretos'
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: required.
+                  example: admin@email.com
+                password:
+                  type: string
+                  description: required.
+                  example: '12345678'
+      security: []
+  /api/admin/authors:
+    get:
+      summary: 'Listar autores'
+      operationId: listarAutores
+      description: 'Endpoint para listar todos os autores'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                  links:
+                    first: 'http://127.0.0.1:8000/api/admin/authors?page=1'
+                    last: 'http://127.0.0.1:8000/api/admin/authors?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://127.0.0.1:8000/api/admin/authors?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://127.0.0.1:8000/api/admin/authors'
+                    per_page: 5
+                    to: 1
+                    total: 1
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 17
+                        first_name:
+                          type: string
+                          example: Benjamin
+                        last_name:
+                          type: string
+                          example: 'Alire Sáenz'
+                        age:
+                          type: integer
+                          example: 68
+                        description:
+                          type: string
+                          example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at:
+                          type: string
+                          example: '06/09/2023 17:34'
+                        updated_at:
+                          type: string
+                          example: '06/09/2023 17:34'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/authors?page=1'
+                      last:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/authors?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://127.0.0.1:8000/api/admin/authors?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/authors'
+                      per_page:
+                        type: integer
+                        example: 5
+                      to:
+                        type: integer
+                        example: 1
+                      total:
+                        type: integer
+                        example: 1
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not found.'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Criar autor'
+      operationId: criarAutor
+      description: 'Endpoint para criar um autor'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 17
+                    first_name: Benjamin
+                    last_name: 'Alire Sáenz'
+                    age: 68
+                    description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                    created_at: '06/09/2023 17:34'
+                    updated_at: '06/09/2023 17:34'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 17
+                      first_name:
+                        type: string
+                        example: Benjamin
+                      last_name:
+                        type: string
+                        example: 'Alire Sáenz'
+                      age:
+                        type: integer
+                        example: 68
+                      description:
+                        type: string
+                        example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at:
+                        type: string
+                        example: '06/09/2023 17:34'
+                      updated_at:
+                        type: string
+                        example: '06/09/2023 17:34'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: ''
+                  example: Taylor
+                last_name:
+                  type: string
+                  description: ''
+                  example: 'Jenkins Reid'
+                age:
+                  type: integer
+                  description: ''
+                  example: 39
+                description:
+                  type: string
+                  description: ''
+                  example: 'É conhecida por seus livros Os Sete Maridos de Evelyn Hugo, Daisy Jones & The Six e Malibu Renasce.'
+              required:
+                - first_name
+                - last_name
+                - age
+                - description
+  '/api/admin/authors/{author_id}':
+    get:
+      summary: 'Visualizar autor'
+      operationId: visualizarAutor
+      description: 'Endpoint para listar um único autor'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 17
+                    first_name: Benjamin
+                    last_name: 'Alire Sáenz'
+                    age: 68
+                    description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                    created_at: '06/09/2023 17:34'
+                    updated_at: '06/09/2023 17:34'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 17
+                      first_name:
+                        type: string
+                        example: Benjamin
+                      last_name:
+                        type: string
+                        example: 'Alire Sáenz'
+                      age:
+                        type: integer
+                        example: 68
+                      description:
+                        type: string
+                        example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at:
+                        type: string
+                        example: '06/09/2023 17:34'
+                      updated_at:
+                        type: string
+                        example: '06/09/2023 17:34'
+      tags:
+        - Endpoints
+    put:
+      summary: 'Editar autor'
+      operationId: editarAutor
+      description: 'Endpoint para editar um autor'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 17
+                    first_name: Benjamin
+                    last_name: 'Alire Sáenz'
+                    age: 68
+                    description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                    created_at: '06/09/2023 17:34'
+                    updated_at: '06/09/2023 17:34'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 17
+                      first_name:
+                        type: string
+                        example: Benjamin
+                      last_name:
+                        type: string
+                        example: 'Alire Sáenz'
+                      age:
+                        type: integer
+                        example: 68
+                      description:
+                        type: string
+                        example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at:
+                        type: string
+                        example: '06/09/2023 17:34'
+                      updated_at:
+                        type: string
+                        example: '06/09/2023 17:34'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: ''
+                  example: Benjamin
+                last_name:
+                  type: string
+                  description: ''
+                  example: 'Alire Sáenz'
+                age:
+                  type: integer
+                  description: ''
+                  example: 18
+                description:
+                  type: string
+                  description: ''
+                  example: 'Nasceu em 1954, no Novo México, Estados Unidos.'
+              required:
+                - first_name
+                - last_name
+                - age
+                - description
+    delete:
+      summary: 'Deletar autor'
+      operationId: deletarAutor
+      description: 'Endpoint para deletar um autor'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 17
+                    first_name: Benjamin
+                    last_name: 'Alire Sáenz'
+                    age: 68
+                    description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                    created_at: '06/09/2023 17:34'
+                    updated_at: '06/09/2023 17:34'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 17
+                      first_name:
+                        type: string
+                        example: Benjamin
+                      last_name:
+                        type: string
+                        example: 'Alire Sáenz'
+                      age:
+                        type: integer
+                        example: 68
+                      description:
+                        type: string
+                        example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at:
+                        type: string
+                        example: '06/09/2023 17:34'
+                      updated_at:
+                        type: string
+                        example: '06/09/2023 17:34'
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: author_id
+        description: 'The ID of the author.'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/admin/books:
+    get:
+      summary: 'Listar livros'
+      operationId: listarLivros
+      description: 'Endpoint para listar todos os livros'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 11
+                      title: 'Evelyn Hugo'
+                      synopsis: TESTEeeeeeeeeeeee
+                      category: Romance
+                      published_at: '2019-11-05'
+                      quantity_in_stock: 1
+                      created_at: '06/09/2023 17:45'
+                      updated_at: '06/09/2023 17:51'
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                  links:
+                    first: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                    last: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://127.0.0.1:8000/api/admin/books'
+                    per_page: 5
+                    to: 1
+                    total: 1
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 11
+                        title: 'Evelyn Hugo'
+                        synopsis: TESTEeeeeeeeeeeee
+                        category: Romance
+                        published_at: '2019-11-05'
+                        quantity_in_stock: 1
+                        created_at: '06/09/2023 17:45'
+                        updated_at: '06/09/2023 17:51'
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 11
+                        title:
+                          type: string
+                          example: 'Evelyn Hugo'
+                        synopsis:
+                          type: string
+                          example: TESTEeeeeeeeeeeee
+                        category:
+                          type: string
+                          example: Romance
+                        published_at:
+                          type: string
+                          example: '2019-11-05'
+                        quantity_in_stock:
+                          type: integer
+                          example: 1
+                        created_at:
+                          type: string
+                          example: '06/09/2023 17:45'
+                        updated_at:
+                          type: string
+                          example: '06/09/2023 17:51'
+                        author:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 17
+                            first_name:
+                              type: string
+                              example: Benjamin
+                            last_name:
+                              type: string
+                              example: 'Alire Sáenz'
+                            age:
+                              type: integer
+                              example: 68
+                            description:
+                              type: string
+                              example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                            created_at:
+                              type: string
+                              example: '06/09/2023 17:34'
+                            updated_at:
+                              type: string
+                              example: '06/09/2023 17:34'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                      last:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/books'
+                      per_page:
+                        type: integer
+                        example: 5
+                      to:
+                        type: integer
+                        example: 1
+                      total:
+                        type: integer
+                        example: 1
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not found.'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Criar livro'
+      operationId: criarLivro
+      description: 'Endpoint para criar um livro'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 12
+                    title: 'Os Sete Maridos de Evelyn Hugo'
+                    synopsis: 'sinopse de teste'
+                    category: Romance
+                    published_at: '2019-11-05'
+                    quantity_in_stock: 3
+                    created_at: '11/09/2023 17:18'
+                    updated_at: '11/09/2023 17:18'
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 12
+                      title:
+                        type: string
+                        example: 'Os Sete Maridos de Evelyn Hugo'
+                      synopsis:
+                        type: string
+                        example: 'sinopse de teste'
+                      category:
+                        type: string
+                        example: Romance
+                      published_at:
+                        type: string
+                        example: '2019-11-05'
+                      quantity_in_stock:
+                        type: integer
+                        example: 3
+                      created_at:
+                        type: string
+                        example: '11/09/2023 17:18'
+                      updated_at:
+                        type: string
+                        example: '11/09/2023 17:18'
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The title has already been taken.'
+                  errors:
+                    title:
+                      - 'The title has already been taken.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The title has already been taken.'
+                  errors:
+                    type: object
+                    properties:
+                      title:
+                        type: array
+                        example:
+                          - 'The title has already been taken.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: 'Os Sete Maridos de Evelyn Hugo'
+                synopsis:
+                  type: string
+                  description: ''
+                  example: 'uma das maiores estrelas de Hollywood, agora a aproximar-se dos 80 anos, decide finalmente contar tudo sobre a sua vida.'
+                category:
+                  type: string
+                  description: ''
+                  example: Romance
+                published_at:
+                  type: date
+                  description: ''
+                  example: '2017-06-13'
+                quantity_in_stock:
+                  type: integer
+                  description: ''
+                  example: 3
+                author_id:
+                  type: integer
+                  description: ''
+                  example: 1
+              required:
+                - title
+                - synopsis
+                - category
+                - published_at
+                - quantity_in_stock
+                - author_id
+  '/api/admin/books/{book_id}':
+    get:
+      summary: 'Visualizar livro'
+      operationId: visualizarLivro
+      description: 'Endpoint para listar um único livro'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 11
+                    title: 'Evelyn Hugo'
+                    synopsis: TESTEeeeeeeeeeeee
+                    category: Romance
+                    published_at: '2019-11-05'
+                    quantity_in_stock: 1
+                    created_at: '06/09/2023 17:45'
+                    updated_at: '06/09/2023 17:51'
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 11
+                      title:
+                        type: string
+                        example: 'Evelyn Hugo'
+                      synopsis:
+                        type: string
+                        example: TESTEeeeeeeeeeeee
+                      category:
+                        type: string
+                        example: Romance
+                      published_at:
+                        type: string
+                        example: '2019-11-05'
+                      quantity_in_stock:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '06/09/2023 17:45'
+                      updated_at:
+                        type: string
+                        example: '06/09/2023 17:51'
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+      tags:
+        - Endpoints
+    put:
+      summary: 'Editar livro'
+      operationId: editarLivro
+      description: 'Endpoint para editar um livro'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 12
+                    title: 'Pequeno Príncipe'
+                    synopsis: 'Um piloto cai com seu avião no deserto e ali encontra uma criança loura e frágil. Ela diz ter vindo de um pequeno planeta distante. E ali, na convivência com o piloto perdido, os dois repensam os seus valores e encontram o sentido da vida.'
+                    category: Infantojuvenil
+                    published_at: '1943-04-06'
+                    quantity_in_stock: 2
+                    created_at: '11/09/2023 17:18'
+                    updated_at: '11/09/2023 17:20'
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 12
+                      title:
+                        type: string
+                        example: 'Pequeno Príncipe'
+                      synopsis:
+                        type: string
+                        example: 'Um piloto cai com seu avião no deserto e ali encontra uma criança loura e frágil. Ela diz ter vindo de um pequeno planeta distante. E ali, na convivência com o piloto perdido, os dois repensam os seus valores e encontram o sentido da vida.'
+                      category:
+                        type: string
+                        example: Infantojuvenil
+                      published_at:
+                        type: string
+                        example: '1943-04-06'
+                      quantity_in_stock:
+                        type: integer
+                        example: 2
+                      created_at:
+                        type: string
+                        example: '11/09/2023 17:18'
+                      updated_at:
+                        type: string
+                        example: '11/09/2023 17:20'
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: 'Os Sete Maridos de Evelyn Hugo'
+                synopsis:
+                  type: string
+                  description: ''
+                  example: 'uma das maiores estrelas de Hollywood, agora a aproximar-se dos 80 anos, decide finalmente contar tudo sobre a sua vida.'
+                category:
+                  type: string
+                  description: ''
+                  example: Romance
+                published_at:
+                  type: date
+                  description: ''
+                  example: '2017-06-13'
+                quantity_in_stock:
+                  type: integer
+                  description: ''
+                  example: 3
+                author_id:
+                  type: integer
+                  description: ''
+                  example: 1
+              required:
+                - title
+                - synopsis
+                - category
+                - published_at
+                - quantity_in_stock
+                - author_id
+    delete:
+      summary: 'Deletar livro'
+      operationId: deletarLivro
+      description: 'Endpoint para deletar um livro'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 12
+                  title: 'Pequeno Príncipe'
+                  synopsis: 'Um piloto cai com seu avião no deserto e ali encontra uma criança loura e frágil. Ela diz ter vindo de um pequeno planeta distante. E ali, na convivência com o piloto perdido, os dois repensam os seus valores e encontram o sentido da vida.'
+                  category: Infantojuvenil
+                  published_at: '1943-04-06'
+                  quantity_in_stock: 2
+                  created_at: '2023-09-11T17:18:48.000000Z'
+                  updated_at: '2023-09-11T17:20:08.000000Z'
+                  author_id: 17
+                properties:
+                  id:
+                    type: integer
+                    example: 12
+                  title:
+                    type: string
+                    example: 'Pequeno Príncipe'
+                  synopsis:
+                    type: string
+                    example: 'Um piloto cai com seu avião no deserto e ali encontra uma criança loura e frágil. Ela diz ter vindo de um pequeno planeta distante. E ali, na convivência com o piloto perdido, os dois repensam os seus valores e encontram o sentido da vida.'
+                  category:
+                    type: string
+                    example: Infantojuvenil
+                  published_at:
+                    type: string
+                    example: '1943-04-06'
+                  quantity_in_stock:
+                    type: integer
+                    example: 2
+                  created_at:
+                    type: string
+                    example: '2023-09-11T17:18:48.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-09-11T17:20:08.000000Z'
+                  author_id:
+                    type: integer
+                    example: 17
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: book_id
+        description: 'The ID of the book.'
+        example: 11
+        required: true
+        schema:
+          type: integer
+  /api/admin/clients:
+    get:
+      summary: 'Listar usuários'
+      operationId: listarUsurios
+      description: 'Endpoint para listar todos os usuários'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 19
+                      name: Administrador
+                      email: admin@email.com
+                      type: ADMIN
+                      '0': '06/09/2023 17:31'
+                      '1': '06/09/2023 17:31'
+                    -
+                      id: 20
+                      name: Cliente
+                      email: client@email.com
+                      type: CLIENT
+                      '0': '06/09/2023 17:31'
+                      '1': '06/09/2023 17:31'
+                    -
+                      id: 22
+                      name: 'Fernanda Larocca Colaço'
+                      email: teste@email.com
+                      type: CLIENT
+                      '0': '06/09/2023 17:47'
+                      '1': '06/09/2023 17:53'
+                  links:
+                    first: 'http://127.0.0.1:8000/api/admin/clients?page=1'
+                    last: 'http://127.0.0.1:8000/api/admin/clients?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://127.0.0.1:8000/api/admin/clients?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://127.0.0.1:8000/api/admin/clients'
+                    per_page: 5
+                    to: 3
+                    total: 3
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 19
+                        name: Administrador
+                        email: admin@email.com
+                        type: ADMIN
+                        0: '06/09/2023 17:31'
+                        1: '06/09/2023 17:31'
+                      -
+                        id: 20
+                        name: Cliente
+                        email: client@email.com
+                        type: CLIENT
+                        0: '06/09/2023 17:31'
+                        1: '06/09/2023 17:31'
+                      -
+                        id: 22
+                        name: 'Fernanda Larocca Colaço'
+                        email: teste@email.com
+                        type: CLIENT
+                        0: '06/09/2023 17:47'
+                        1: '06/09/2023 17:53'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 19
+                        name:
+                          type: string
+                          example: Administrador
+                        email:
+                          type: string
+                          example: admin@email.com
+                        type:
+                          type: string
+                          example: ADMIN
+                        0:
+                          type: string
+                          example: '06/09/2023 17:31'
+                        1:
+                          type: string
+                          example: '06/09/2023 17:31'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/clients?page=1'
+                      last:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/clients?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://127.0.0.1:8000/api/admin/clients?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/clients'
+                      per_page:
+                        type: integer
+                        example: 5
+                      to:
+                        type: integer
+                        example: 3
+                      total:
+                        type: integer
+                        example: 3
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not found.'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Criar usuário'
+      operationId: criarUsurio
+      description: 'Endpoint para criar um usuário'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 23
+                    name: 'Usuário Teste'
+                    email: teste1@email.com
+                    type: CLIENT
+                    '0': '11/09/2023 17:37'
+                    '1': '11/09/2023 17:37'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 23
+                      name:
+                        type: string
+                        example: 'Usuário Teste'
+                      email:
+                        type: string
+                        example: teste1@email.com
+                      type:
+                        type: string
+                        example: CLIENT
+                      0:
+                        type: string
+                        example: '11/09/2023 17:37'
+                      1:
+                        type: string
+                        example: '11/09/2023 17:37'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: 'Usuário Teste'
+                email:
+                  type: string
+                  description: ''
+                  example: teste1@email.com
+                password:
+                  type: string
+                  description: ''
+                  example: '12345678'
+                is_admin:
+                  type: boolean
+                  description: ''
+                  example: false
+              required:
+                - name
+                - email
+                - password
+                - is_admin
+  '/api/admin/clients/{user_id}':
+    get:
+      summary: 'Visualizar usuário'
+      operationId: visualizarUsurio
+      description: 'Endpoint para listar um único usuário'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 23
+                    name: Teste
+                    email: teste1@email.com
+                    type: CLIENT
+                    '0': '11/09/2023 17:37'
+                    '1': '11/09/2023 17:41'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 23
+                      name:
+                        type: string
+                        example: Teste
+                      email:
+                        type: string
+                        example: teste1@email.com
+                      type:
+                        type: string
+                        example: CLIENT
+                      0:
+                        type: string
+                        example: '11/09/2023 17:37'
+                      1:
+                        type: string
+                        example: '11/09/2023 17:41'
+      tags:
+        - Endpoints
+    put:
+      summary: 'Editar usuário'
+      operationId: editarUsurio
+      description: 'Endpoint para editar um usuário'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 23
+                    name: Teste
+                    email: teste1@email.com
+                    type: CLIENT
+                    '0': '11/09/2023 17:37'
+                    '1': '11/09/2023 17:41'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 23
+                      name:
+                        type: string
+                        example: Teste
+                      email:
+                        type: string
+                        example: teste1@email.com
+                      type:
+                        type: string
+                        example: CLIENT
+                      0:
+                        type: string
+                        example: '11/09/2023 17:37'
+                      1:
+                        type: string
+                        example: '11/09/2023 17:41'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: Teste
+                email:
+                  type: string
+                  description: ''
+                  example: teste1@email.com
+                password:
+                  type: string
+                  description: ''
+                  example: '12345678'
+                is_admin:
+                  type: boolean
+                  description: ''
+                  example: false
+              required:
+                - name
+                - email
+                - password
+                - is_admin
+    delete:
+      summary: 'Deletar usuário'
+      operationId: deletarUsurio
+      description: 'Endpoint para deletar um usuário'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 23
+                  name: Teste
+                  email: teste1@email.com
+                  created_at: '2023-09-11T17:37:26.000000Z'
+                  updated_at: '2023-09-11T17:41:33.000000Z'
+                  is_admin: false
+                properties:
+                  id:
+                    type: integer
+                    example: 23
+                  name:
+                    type: string
+                    example: Teste
+                  email:
+                    type: string
+                    example: teste1@email.com
+                  created_at:
+                    type: string
+                    example: '2023-09-11T17:37:26.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-09-11T17:41:33.000000Z'
+                  is_admin:
+                    type: boolean
+                    example: false
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: 19
+        required: true
+        schema:
+          type: integer
+  /api/admin/loans:
+    get:
+      summary: 'Listar empréstimos'
+      operationId: listarEmprstimos
+      description: 'Endpoint para listar todos os empréstimos'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 5
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                      book:
+                        id: 11
+                        title: 'Evelyn Hugo'
+                        synopsis: TESTEeeeeeeeeeeee
+                        category: Romance
+                        published_at: '2019-11-05'
+                        quantity_in_stock: 0
+                        created_at: '06/09/2023 17:45'
+                        updated_at: '11/09/2023 17:59'
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                      created_at: '06/09/2023 17:51'
+                      updated_at: '06/09/2023 17:51'
+                    -
+                      id: 6
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                      book:
+                        id: 11
+                        title: 'Evelyn Hugo'
+                        synopsis: TESTEeeeeeeeeeeee
+                        category: Romance
+                        published_at: '2019-11-05'
+                        quantity_in_stock: 0
+                        created_at: '06/09/2023 17:45'
+                        updated_at: '11/09/2023 17:59'
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                      created_at: '11/09/2023 17:59'
+                      updated_at: '11/09/2023 17:59'
+                  links:
+                    first: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                    last: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://127.0.0.1:8000/api/admin/loans'
+                    per_page: 5
+                    to: 2
+                    total: 2
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 5
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                        book:
+                          id: 11
+                          title: 'Evelyn Hugo'
+                          synopsis: TESTEeeeeeeeeeeee
+                          category: Romance
+                          published_at: '2019-11-05'
+                          quantity_in_stock: 0
+                          created_at: '06/09/2023 17:45'
+                          updated_at: '11/09/2023 17:59'
+                          author:
+                            id: 17
+                            first_name: Benjamin
+                            last_name: 'Alire Sáenz'
+                            age: 68
+                            description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                            created_at: '06/09/2023 17:34'
+                            updated_at: '06/09/2023 17:34'
+                        created_at: '06/09/2023 17:51'
+                        updated_at: '06/09/2023 17:51'
+                      -
+                        id: 6
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                        book:
+                          id: 11
+                          title: 'Evelyn Hugo'
+                          synopsis: TESTEeeeeeeeeeeee
+                          category: Romance
+                          published_at: '2019-11-05'
+                          quantity_in_stock: 0
+                          created_at: '06/09/2023 17:45'
+                          updated_at: '11/09/2023 17:59'
+                          author:
+                            id: 17
+                            first_name: Benjamin
+                            last_name: 'Alire Sáenz'
+                            age: 68
+                            description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                            created_at: '06/09/2023 17:34'
+                            updated_at: '06/09/2023 17:34'
+                        created_at: '11/09/2023 17:59'
+                        updated_at: '11/09/2023 17:59'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 5
+                        author:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 17
+                            first_name:
+                              type: string
+                              example: Benjamin
+                            last_name:
+                              type: string
+                              example: 'Alire Sáenz'
+                            age:
+                              type: integer
+                              example: 68
+                            description:
+                              type: string
+                              example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                            created_at:
+                              type: string
+                              example: '06/09/2023 17:34'
+                            updated_at:
+                              type: string
+                              example: '06/09/2023 17:34'
+                        book:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 11
+                            title:
+                              type: string
+                              example: 'Evelyn Hugo'
+                            synopsis:
+                              type: string
+                              example: TESTEeeeeeeeeeeee
+                            category:
+                              type: string
+                              example: Romance
+                            published_at:
+                              type: string
+                              example: '2019-11-05'
+                            quantity_in_stock:
+                              type: integer
+                              example: 0
+                            created_at:
+                              type: string
+                              example: '06/09/2023 17:45'
+                            updated_at:
+                              type: string
+                              example: '11/09/2023 17:59'
+                            author:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  example: 17
+                                first_name:
+                                  type: string
+                                  example: Benjamin
+                                last_name:
+                                  type: string
+                                  example: 'Alire Sáenz'
+                                age:
+                                  type: integer
+                                  example: 68
+                                description:
+                                  type: string
+                                  example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                                created_at:
+                                  type: string
+                                  example: '06/09/2023 17:34'
+                                updated_at:
+                                  type: string
+                                  example: '06/09/2023 17:34'
+                        created_at:
+                          type: string
+                          example: '06/09/2023 17:51'
+                        updated_at:
+                          type: string
+                          example: '06/09/2023 17:51'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                      last:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/loans'
+                      per_page:
+                        type: integer
+                        example: 5
+                      to:
+                        type: integer
+                        example: 2
+                      total:
+                        type: integer
+                        example: 2
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not found.'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Criar empréstimo'
+      operationId: criarEmprstimo
+      description: 'Endpoint para criar um empréstimo'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 6
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                    book:
+                      id: 11
+                      title: 'Evelyn Hugo'
+                      synopsis: TESTEeeeeeeeeeeee
+                      category: Romance
+                      published_at: '2019-11-05'
+                      quantity_in_stock: 0
+                      created_at: '06/09/2023 17:45'
+                      updated_at: '11/09/2023 17:59'
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                    created_at: '11/09/2023 17:59'
+                    updated_at: '11/09/2023 17:59'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 6
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                      book:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 11
+                          title:
+                            type: string
+                            example: 'Evelyn Hugo'
+                          synopsis:
+                            type: string
+                            example: TESTEeeeeeeeeeeee
+                          category:
+                            type: string
+                            example: Romance
+                          published_at:
+                            type: string
+                            example: '2019-11-05'
+                          quantity_in_stock:
+                            type: integer
+                            example: 0
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:45'
+                          updated_at:
+                            type: string
+                            example: '11/09/2023 17:59'
+                          author:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 17
+                              first_name:
+                                type: string
+                                example: Benjamin
+                              last_name:
+                                type: string
+                                example: 'Alire Sáenz'
+                              age:
+                                type: integer
+                                example: 68
+                              description:
+                                type: string
+                                example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                              created_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                              updated_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                      created_at:
+                        type: string
+                        example: '11/09/2023 17:59'
+                      updated_at:
+                        type: string
+                        example: '11/09/2023 17:59'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author_id:
+                  type: integer
+                  description: ''
+                  example: 1
+                book_id:
+                  type: integer
+                  description: ''
+                  example: 2
+                quantity:
+                  type: integer
+                  description: ''
+                  example: 1
+              required:
+                - author_id
+                - book_id
+                - quantity
+  '/api/admin/loans/{loan_id}':
+    get:
+      summary: 'Visualizar empréstimo'
+      operationId: visualizarEmprstimo
+      description: 'Endpoint para listar um único empréstimo'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 5
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                    book:
+                      id: 11
+                      title: 'Evelyn Hugo'
+                      synopsis: TESTEeeeeeeeeeeee
+                      category: Romance
+                      published_at: '2019-11-05'
+                      quantity_in_stock: 0
+                      created_at: '06/09/2023 17:45'
+                      updated_at: '11/09/2023 17:59'
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                    created_at: '06/09/2023 17:51'
+                    updated_at: '06/09/2023 17:51'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 5
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                      book:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 11
+                          title:
+                            type: string
+                            example: 'Evelyn Hugo'
+                          synopsis:
+                            type: string
+                            example: TESTEeeeeeeeeeeee
+                          category:
+                            type: string
+                            example: Romance
+                          published_at:
+                            type: string
+                            example: '2019-11-05'
+                          quantity_in_stock:
+                            type: integer
+                            example: 0
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:45'
+                          updated_at:
+                            type: string
+                            example: '11/09/2023 17:59'
+                          author:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 17
+                              first_name:
+                                type: string
+                                example: Benjamin
+                              last_name:
+                                type: string
+                                example: 'Alire Sáenz'
+                              age:
+                                type: integer
+                                example: 68
+                              description:
+                                type: string
+                                example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                              created_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                              updated_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                      created_at:
+                        type: string
+                        example: '06/09/2023 17:51'
+                      updated_at:
+                        type: string
+                        example: '06/09/2023 17:51'
+      tags:
+        - Endpoints
+    put:
+      summary: 'Editar empréstimo'
+      operationId: editarEmprstimo
+      description: 'Endpoint para editar um empréstimo'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 7
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                    book:
+                      id: 13
+                      title: 'Evelyn Hugooo'
+                      synopsis: 'sinopse de teste'
+                      category: Romance
+                      published_at: '2019-11-05'
+                      quantity_in_stock: 2
+                      created_at: '11/09/2023 18:01'
+                      updated_at: '11/09/2023 18:01'
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                    created_at: '11/09/2023 18:01'
+                    updated_at: '11/09/2023 18:02'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 7
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                      book:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 13
+                          title:
+                            type: string
+                            example: 'Evelyn Hugooo'
+                          synopsis:
+                            type: string
+                            example: 'sinopse de teste'
+                          category:
+                            type: string
+                            example: Romance
+                          published_at:
+                            type: string
+                            example: '2019-11-05'
+                          quantity_in_stock:
+                            type: integer
+                            example: 2
+                          created_at:
+                            type: string
+                            example: '11/09/2023 18:01'
+                          updated_at:
+                            type: string
+                            example: '11/09/2023 18:01'
+                          author:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 17
+                              first_name:
+                                type: string
+                                example: Benjamin
+                              last_name:
+                                type: string
+                                example: 'Alire Sáenz'
+                              age:
+                                type: integer
+                                example: 68
+                              description:
+                                type: string
+                                example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                              created_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                              updated_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                      created_at:
+                        type: string
+                        example: '11/09/2023 18:01'
+                      updated_at:
+                        type: string
+                        example: '11/09/2023 18:02'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author_id:
+                  type: integer
+                  description: ''
+                  example: 1
+                book_id:
+                  type: integer
+                  description: ''
+                  example: 2
+                quantity:
+                  type: integer
+                  description: ''
+                  example: 2
+              required:
+                - author_id
+                - book_id
+                - quantity
+    delete:
+      summary: 'Deletar empréstimo'
+      operationId: deletarEmprstimo
+      description: 'Endpoint para deletar um empréstimo'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 7
+                  author_id: 17
+                  book_id: 13
+                  quantity: 2
+                  created_at: '2023-09-11T18:01:59.000000Z'
+                  updated_at: '2023-09-11T18:02:17.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 7
+                  author_id:
+                    type: integer
+                    example: 17
+                  book_id:
+                    type: integer
+                    example: 13
+                  quantity:
+                    type: integer
+                    example: 2
+                  created_at:
+                    type: string
+                    example: '2023-09-11T18:01:59.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-09-11T18:02:17.000000Z'
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: loan_id
+        description: 'The ID of the loan.'
+        example: 5
+        required: true
+        schema:
+          type: integer
+  /api/client/books:
+    get:
+      summary: 'Listar livros'
+      operationId: listarLivros
+      description: 'Endpoint para listar todos os livros'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 11
+                      title: 'Evelyn Hugo'
+                      synopsis: TESTEeeeeeeeeeeee
+                      category: Romance
+                      published_at: '2019-11-05'
+                      quantity_in_stock: 1
+                      created_at: '06/09/2023 17:45'
+                      updated_at: '06/09/2023 17:51'
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                  links:
+                    first: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                    last: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://127.0.0.1:8000/api/admin/books'
+                    per_page: 5
+                    to: 1
+                    total: 1
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 11
+                        title: 'Evelyn Hugo'
+                        synopsis: TESTEeeeeeeeeeeee
+                        category: Romance
+                        published_at: '2019-11-05'
+                        quantity_in_stock: 1
+                        created_at: '06/09/2023 17:45'
+                        updated_at: '06/09/2023 17:51'
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 11
+                        title:
+                          type: string
+                          example: 'Evelyn Hugo'
+                        synopsis:
+                          type: string
+                          example: TESTEeeeeeeeeeeee
+                        category:
+                          type: string
+                          example: Romance
+                        published_at:
+                          type: string
+                          example: '2019-11-05'
+                        quantity_in_stock:
+                          type: integer
+                          example: 1
+                        created_at:
+                          type: string
+                          example: '06/09/2023 17:45'
+                        updated_at:
+                          type: string
+                          example: '06/09/2023 17:51'
+                        author:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 17
+                            first_name:
+                              type: string
+                              example: Benjamin
+                            last_name:
+                              type: string
+                              example: 'Alire Sáenz'
+                            age:
+                              type: integer
+                              example: 68
+                            description:
+                              type: string
+                              example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                            created_at:
+                              type: string
+                              example: '06/09/2023 17:34'
+                            updated_at:
+                              type: string
+                              example: '06/09/2023 17:34'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                      last:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://127.0.0.1:8000/api/admin/books?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/books'
+                      per_page:
+                        type: integer
+                        example: 5
+                      to:
+                        type: integer
+                        example: 1
+                      total:
+                        type: integer
+                        example: 1
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not found.'
+      tags:
+        - Endpoints
+  '/api/client/books/{book_id}':
+    get:
+      summary: 'Visualizar livro'
+      operationId: visualizarLivro
+      description: 'Endpoint para listar um único livro'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 11
+                    title: 'Evelyn Hugo'
+                    synopsis: TESTEeeeeeeeeeeee
+                    category: Romance
+                    published_at: '2019-11-05'
+                    quantity_in_stock: 1
+                    created_at: '06/09/2023 17:45'
+                    updated_at: '06/09/2023 17:51'
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 11
+                      title:
+                        type: string
+                        example: 'Evelyn Hugo'
+                      synopsis:
+                        type: string
+                        example: TESTEeeeeeeeeeeee
+                      category:
+                        type: string
+                        example: Romance
+                      published_at:
+                        type: string
+                        example: '2019-11-05'
+                      quantity_in_stock:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '06/09/2023 17:45'
+                      updated_at:
+                        type: string
+                        example: '06/09/2023 17:51'
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: book_id
+        description: 'The ID of the book.'
+        example: 11
+        required: true
+        schema:
+          type: integer
+  /api/client/loans:
+    get:
+      summary: 'Listar empréstimos'
+      operationId: listarEmprstimos
+      description: 'Endpoint para listar todos os empréstimos'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 5
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                      book:
+                        id: 11
+                        title: 'Evelyn Hugo'
+                        synopsis: TESTEeeeeeeeeeeee
+                        category: Romance
+                        published_at: '2019-11-05'
+                        quantity_in_stock: 0
+                        created_at: '06/09/2023 17:45'
+                        updated_at: '11/09/2023 17:59'
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                      created_at: '06/09/2023 17:51'
+                      updated_at: '06/09/2023 17:51'
+                    -
+                      id: 6
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                      book:
+                        id: 11
+                        title: 'Evelyn Hugo'
+                        synopsis: TESTEeeeeeeeeeeee
+                        category: Romance
+                        published_at: '2019-11-05'
+                        quantity_in_stock: 0
+                        created_at: '06/09/2023 17:45'
+                        updated_at: '11/09/2023 17:59'
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                      created_at: '11/09/2023 17:59'
+                      updated_at: '11/09/2023 17:59'
+                  links:
+                    first: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                    last: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://127.0.0.1:8000/api/admin/loans'
+                    per_page: 5
+                    to: 2
+                    total: 2
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 5
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                        book:
+                          id: 11
+                          title: 'Evelyn Hugo'
+                          synopsis: TESTEeeeeeeeeeeee
+                          category: Romance
+                          published_at: '2019-11-05'
+                          quantity_in_stock: 0
+                          created_at: '06/09/2023 17:45'
+                          updated_at: '11/09/2023 17:59'
+                          author:
+                            id: 17
+                            first_name: Benjamin
+                            last_name: 'Alire Sáenz'
+                            age: 68
+                            description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                            created_at: '06/09/2023 17:34'
+                            updated_at: '06/09/2023 17:34'
+                        created_at: '06/09/2023 17:51'
+                        updated_at: '06/09/2023 17:51'
+                      -
+                        id: 6
+                        author:
+                          id: 17
+                          first_name: Benjamin
+                          last_name: 'Alire Sáenz'
+                          age: 68
+                          description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at: '06/09/2023 17:34'
+                          updated_at: '06/09/2023 17:34'
+                        book:
+                          id: 11
+                          title: 'Evelyn Hugo'
+                          synopsis: TESTEeeeeeeeeeeee
+                          category: Romance
+                          published_at: '2019-11-05'
+                          quantity_in_stock: 0
+                          created_at: '06/09/2023 17:45'
+                          updated_at: '11/09/2023 17:59'
+                          author:
+                            id: 17
+                            first_name: Benjamin
+                            last_name: 'Alire Sáenz'
+                            age: 68
+                            description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                            created_at: '06/09/2023 17:34'
+                            updated_at: '06/09/2023 17:34'
+                        created_at: '11/09/2023 17:59'
+                        updated_at: '11/09/2023 17:59'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 5
+                        author:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 17
+                            first_name:
+                              type: string
+                              example: Benjamin
+                            last_name:
+                              type: string
+                              example: 'Alire Sáenz'
+                            age:
+                              type: integer
+                              example: 68
+                            description:
+                              type: string
+                              example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                            created_at:
+                              type: string
+                              example: '06/09/2023 17:34'
+                            updated_at:
+                              type: string
+                              example: '06/09/2023 17:34'
+                        book:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 11
+                            title:
+                              type: string
+                              example: 'Evelyn Hugo'
+                            synopsis:
+                              type: string
+                              example: TESTEeeeeeeeeeeee
+                            category:
+                              type: string
+                              example: Romance
+                            published_at:
+                              type: string
+                              example: '2019-11-05'
+                            quantity_in_stock:
+                              type: integer
+                              example: 0
+                            created_at:
+                              type: string
+                              example: '06/09/2023 17:45'
+                            updated_at:
+                              type: string
+                              example: '11/09/2023 17:59'
+                            author:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  example: 17
+                                first_name:
+                                  type: string
+                                  example: Benjamin
+                                last_name:
+                                  type: string
+                                  example: 'Alire Sáenz'
+                                age:
+                                  type: integer
+                                  example: 68
+                                description:
+                                  type: string
+                                  example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                                created_at:
+                                  type: string
+                                  example: '06/09/2023 17:34'
+                                updated_at:
+                                  type: string
+                                  example: '06/09/2023 17:34'
+                        created_at:
+                          type: string
+                          example: '06/09/2023 17:51'
+                        updated_at:
+                          type: string
+                          example: '06/09/2023 17:51'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                      last:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://127.0.0.1:8000/api/admin/loans?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://127.0.0.1:8000/api/admin/loans'
+                      per_page:
+                        type: integer
+                        example: 5
+                      to:
+                        type: integer
+                        example: 2
+                      total:
+                        type: integer
+                        example: 2
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not found.'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Criar empréstimo'
+      operationId: criarEmprstimo
+      description: 'Endpoint para criar um empréstimo'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 6
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                    book:
+                      id: 11
+                      title: 'Evelyn Hugo'
+                      synopsis: TESTEeeeeeeeeeeee
+                      category: Romance
+                      published_at: '2019-11-05'
+                      quantity_in_stock: 0
+                      created_at: '06/09/2023 17:45'
+                      updated_at: '11/09/2023 17:59'
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                    created_at: '11/09/2023 17:59'
+                    updated_at: '11/09/2023 17:59'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 6
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                      book:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 11
+                          title:
+                            type: string
+                            example: 'Evelyn Hugo'
+                          synopsis:
+                            type: string
+                            example: TESTEeeeeeeeeeeee
+                          category:
+                            type: string
+                            example: Romance
+                          published_at:
+                            type: string
+                            example: '2019-11-05'
+                          quantity_in_stock:
+                            type: integer
+                            example: 0
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:45'
+                          updated_at:
+                            type: string
+                            example: '11/09/2023 17:59'
+                          author:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 17
+                              first_name:
+                                type: string
+                                example: Benjamin
+                              last_name:
+                                type: string
+                                example: 'Alire Sáenz'
+                              age:
+                                type: integer
+                                example: 68
+                              description:
+                                type: string
+                                example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                              created_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                              updated_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                      created_at:
+                        type: string
+                        example: '11/09/2023 17:59'
+                      updated_at:
+                        type: string
+                        example: '11/09/2023 17:59'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author_id:
+                  type: integer
+                  description: ''
+                  example: 1
+                book_id:
+                  type: integer
+                  description: ''
+                  example: 2
+                quantity:
+                  type: integer
+                  description: ''
+                  example: 1
+              required:
+                - author_id
+                - book_id
+                - quantity
+  '/api/client/loans/{loan_id}':
+    get:
+      summary: 'Visualizar empréstimo'
+      operationId: visualizarEmprstimo
+      description: 'Endpoint para listar um único empréstimo'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 5
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                    book:
+                      id: 11
+                      title: 'Evelyn Hugo'
+                      synopsis: TESTEeeeeeeeeeeee
+                      category: Romance
+                      published_at: '2019-11-05'
+                      quantity_in_stock: 0
+                      created_at: '06/09/2023 17:45'
+                      updated_at: '11/09/2023 17:59'
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                    created_at: '06/09/2023 17:51'
+                    updated_at: '06/09/2023 17:51'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 5
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                      book:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 11
+                          title:
+                            type: string
+                            example: 'Evelyn Hugo'
+                          synopsis:
+                            type: string
+                            example: TESTEeeeeeeeeeeee
+                          category:
+                            type: string
+                            example: Romance
+                          published_at:
+                            type: string
+                            example: '2019-11-05'
+                          quantity_in_stock:
+                            type: integer
+                            example: 0
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:45'
+                          updated_at:
+                            type: string
+                            example: '11/09/2023 17:59'
+                          author:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 17
+                              first_name:
+                                type: string
+                                example: Benjamin
+                              last_name:
+                                type: string
+                                example: 'Alire Sáenz'
+                              age:
+                                type: integer
+                                example: 68
+                              description:
+                                type: string
+                                example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                              created_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                              updated_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                      created_at:
+                        type: string
+                        example: '06/09/2023 17:51'
+                      updated_at:
+                        type: string
+                        example: '06/09/2023 17:51'
+      tags:
+        - Endpoints
+    put:
+      summary: 'Editar empréstimo'
+      operationId: editarEmprstimo
+      description: 'Endpoint para editar um empréstimo'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 7
+                    author:
+                      id: 17
+                      first_name: Benjamin
+                      last_name: 'Alire Sáenz'
+                      age: 68
+                      description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                      created_at: '06/09/2023 17:34'
+                      updated_at: '06/09/2023 17:34'
+                    book:
+                      id: 13
+                      title: 'Evelyn Hugooo'
+                      synopsis: 'sinopse de teste'
+                      category: Romance
+                      published_at: '2019-11-05'
+                      quantity_in_stock: 2
+                      created_at: '11/09/2023 18:01'
+                      updated_at: '11/09/2023 18:01'
+                      author:
+                        id: 17
+                        first_name: Benjamin
+                        last_name: 'Alire Sáenz'
+                        age: 68
+                        description: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                        created_at: '06/09/2023 17:34'
+                        updated_at: '06/09/2023 17:34'
+                    created_at: '11/09/2023 18:01'
+                    updated_at: '11/09/2023 18:02'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 7
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 17
+                          first_name:
+                            type: string
+                            example: Benjamin
+                          last_name:
+                            type: string
+                            example: 'Alire Sáenz'
+                          age:
+                            type: integer
+                            example: 68
+                          description:
+                            type: string
+                            example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                          created_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                          updated_at:
+                            type: string
+                            example: '06/09/2023 17:34'
+                      book:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 13
+                          title:
+                            type: string
+                            example: 'Evelyn Hugooo'
+                          synopsis:
+                            type: string
+                            example: 'sinopse de teste'
+                          category:
+                            type: string
+                            example: Romance
+                          published_at:
+                            type: string
+                            example: '2019-11-05'
+                          quantity_in_stock:
+                            type: integer
+                            example: 2
+                          created_at:
+                            type: string
+                            example: '11/09/2023 18:01'
+                          updated_at:
+                            type: string
+                            example: '11/09/2023 18:01'
+                          author:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 17
+                              first_name:
+                                type: string
+                                example: Benjamin
+                              last_name:
+                                type: string
+                                example: 'Alire Sáenz'
+                              age:
+                                type: integer
+                                example: 68
+                              description:
+                                type: string
+                                example: 'Nasceu em 1954, no Novo México, Estados Unidos. É chefe do departamento de escrita criativa da Universidade do Texas em El Paso e escreve prosa e poesia para jovens adultos.'
+                              created_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                              updated_at:
+                                type: string
+                                example: '06/09/2023 17:34'
+                      created_at:
+                        type: string
+                        example: '11/09/2023 18:01'
+                      updated_at:
+                        type: string
+                        example: '11/09/2023 18:02'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author_id:
+                  type: integer
+                  description: ''
+                  example: 1
+                book_id:
+                  type: integer
+                  description: ''
+                  example: 2
+                quantity:
+                  type: integer
+                  description: ''
+                  example: 2
+              required:
+                - author_id
+                - book_id
+                - quantity
+    parameters:
+      -
+        in: path
+        name: loan_id
+        description: 'The ID of the loan.'
+        example: 5
+        required: true
+        schema:
+          type: integer
+  '/api/client/profile/{user}':
+    put:
+      summary: 'Editar perfil'
+      operationId: editarPerfil
+      description: 'Endpoint para editar o perfil do usuário'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 22
+                    name: 'Fernanda Larocca Colaço'
+                    email: teste@email.com
+                    type: CLIENT
+                    '0': '06/09/2023 17:47'
+                    '1': '11/09/2023 18:07'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 22
+                      name:
+                        type: string
+                        example: 'Fernanda Larocca Colaço'
+                      email:
+                        type: string
+                        example: teste@email.com
+                      type:
+                        type: string
+                        example: CLIENT
+                      0:
+                        type: string
+                        example: '06/09/2023 17:47'
+                      1:
+                        type: string
+                        example: '11/09/2023 18:07'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: 'João da Silva'
+                email:
+                  type: string
+                  description: ''
+                  example: teste@email.com
+                password:
+                  type: integer
+                  description: ''
+                  example: 12345678
+                is_admin:
+                  type: boolean
+                  description: ''
+                  example: false
+              required:
+                - name
+                - email
+                - password
+                - is_admin
+    parameters:
+      -
+        in: path
+        name: user
+        description: ''
+        example: et
+        required: true
+        schema:
+          type: string
+tags:
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []
