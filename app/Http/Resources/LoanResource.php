@@ -12,6 +12,7 @@ class LoanResource extends JsonResource
             'id' => $this->id,
             'author' => AuthorResource::make($this->author),
             'book' => BookResource::make($this->book),
+            'quantity' => $this->quantity,
             'created_at' => $this->created_at->format('d/m/Y H:i'),
             'updated_at' => $this->updated_at->format('d/m/Y H:i')
         ];

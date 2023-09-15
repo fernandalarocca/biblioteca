@@ -13,8 +13,8 @@ class ClientResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'type' => $this->is_admin ? 'ADMIN' : 'CLIENT',
-            optional($this->created_at)->format('d/m/Y H:i'),
-            optional($this->updated_at)->format('d/m/Y H:i'),
+            'created_at' => $this->created_at->format('d/m/Y H:i'),
+            'updated_at' => $this->updated_at->format('d/m/Y H:i')
         ];
     }
 }
