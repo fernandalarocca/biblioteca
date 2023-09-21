@@ -9,7 +9,7 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         $userId = optional($this->route())->user;
-        return [
+        $rules = [
             'name' => ['required', 'string', 'min:5', 'max:255'],
             'email' => [
                 'required',
@@ -19,5 +19,11 @@ class ClientRequest extends FormRequest
             'password' => ['required', 'string', 'min:6', 'max:255'],
             'is_admin' => ['required', 'boolean']
         ];
+
+        if($this->method('PUT') && $this->user) {
+            $rules['password'] = ['sometimes', 'string', 'min:6', 'max:255'];
+        }
+
+        return $rules;
     }
 }

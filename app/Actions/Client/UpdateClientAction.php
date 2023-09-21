@@ -9,7 +9,10 @@ class UpdateClientAction
 {
     public function execute(array $data, User $user): User
     {
-        $data['password'] = Hash::make($data['password']);
+        if($password = data_get($data, 'password')){
+            $data['password'] = Hash::make($password);
+        }
+
         $user->update($data);
         return $user;
     }
