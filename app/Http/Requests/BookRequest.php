@@ -8,7 +8,7 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'min:5', 'max:255', 'unique:books,title'],
+            'title' => ['required', 'string', 'min:5', 'max:255'],
             'synopsis' => ['required', 'string', 'min:10', 'max:255'],
             'category' => ['required', 'string', 'min:3', 'max:255'],
             'published_at' => ['required', 'date'],
