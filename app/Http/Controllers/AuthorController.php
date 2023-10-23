@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Author\CreateAuthorAction;
+use App\Actions\Author\UpdateAuthorAction;
 use App\Http\Requests\AuthorRequest;
 use App\Http\Resources\AuthorResource;
 use App\Models\Author;
@@ -71,8 +73,7 @@ class AuthorController extends Controller
     public function create(AuthorRequest $request)
     {
         $data = $request->validated();
-        $author = Author::make($data);
-        $author->save();
+        $author = (new CreateAuthorAction())->execute($data);
         return AuthorResource::make($author);
     }
 
@@ -98,7 +99,7 @@ class AuthorController extends Controller
     public function update(AuthorRequest $request, Author $author)
     {
         $data = $request->validated();
-        $author->update($data);
+        $author = (new UpdateAuthorAction())->execute($data, $author);
         return AuthorResource::make($author);
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Book\CreateBookAction;
+use App\Actions\Book\UpdateBookAction;
 use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
@@ -74,9 +76,7 @@ class BookController extends Controller
     public function create(BookRequest $request)
     {
         $data = $request->validated();
-        $book = Book::make($data);
-        $book->save();
-
+        $book = (new CreateBookAction())->execute($data);
         return BookResource::make($book);
     }
 
@@ -104,7 +104,7 @@ class BookController extends Controller
     public function update(BookRequest $request, Book $book)
     {
         $data = $request->validated();
-        $book->update($data);
+        $book = (new UpdateBookAction())->execute($data, $book);
         return BookResource::make($book);
     }
 
