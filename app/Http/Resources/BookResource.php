@@ -17,7 +17,7 @@ class BookResource extends JsonResource
             'quantity_in_stock' => $this->quantity_in_stock,
             'created_at' => $this->created_at->format('d/m/Y H:i'),
             'updated_at' => $this->updated_at->format('d/m/Y H:i'),
-            'author' => AuthorResource::make($this->author)
+            'author' => AuthorResource::make($this->author),
         ];
     }
 }

@@ -29,7 +29,8 @@ class AuthorController extends Controller
     {
         $perpage = request()->query('limit', 5);
         $authors = Author::query()->paginate($perpage);
-        return AuthorResource::collection($authors);
+        $authorsResource = AuthorResource::collection($authors);
+        return view("author.index", compact("authorsResource"));
     }
 
     /**
@@ -44,11 +45,12 @@ class AuthorController extends Controller
      * @header Content-Type application/json
      * @header Accept application/json
      *
-     * @responseFile app/api-documentation/admin/authors/show.json
+     * @responseFile app/api-documentation/admin/authors/show.blade.php.json
      */
     public function show(Author $author)
     {
-        return AuthorResource::make($author);
+        $author = AuthorResource::make($author);
+        return view('author.show', compact("author"));
     }
 
     /**
@@ -70,11 +72,16 @@ class AuthorController extends Controller
      *
      * @responseFile app/api-documentation/admin/authors/create.json
      */
-    public function create(AuthorRequest $request)
+    public function create()
+    {
+        return view('author.create');
+    }
+
+    public function store(AuthorRequest $request)
     {
         $data = $request->validated();
         $author = (new CreateAuthorAction())->execute($data);
-        return AuthorResource::make($author);
+        return redirect()->route('authors.list');
     }
 
     /**
@@ -96,11 +103,16 @@ class AuthorController extends Controller
      *
      * @responseFile app/api-documentation/admin/authors/update.json
      */
+    public function edit(Author $author)
+    {
+        return view('author.update', compact("author"));
+    }
+
     public function update(AuthorRequest $request, Author $author)
     {
         $data = $request->validated();
         $author = (new UpdateAuthorAction())->execute($data, $author);
-        return AuthorResource::make($author);
+        return redirect()->route('authors.list');
     }
 
     /**
@@ -119,7 +131,8 @@ class AuthorController extends Controller
      */
     public function delete(Author $author)
     {
+        $author->loans()->delete();
         $author->delete();
-        return $author;
+        return redirect()->back();
     }
 }

@@ -29,7 +29,8 @@ class BookController extends Controller
     {
         $perpage = request()->query('limit', 5);
         $books = Book::query()->paginate($perpage);
-        return BookResource::collection($books);
+        $booksResource = BookResource::collection($books);
+        return view("book.index", compact("booksResource"));
     }
 
     /**
@@ -44,11 +45,17 @@ class BookController extends Controller
      * @header Content-Type application/json
      * @header Accept application/json
      *
-     * @responseFile app/api-documentation/admin/books/show.json
+     * @responseFile app/api-documentation/admin/books/show.blade.php.json
      */
     public function show(Book $book)
     {
-        return BookResource::make($book);
+         $book = BookResource::make($book);
+         return view('book.show', compact("book"));
+    }
+
+    public function create()
+    {
+        return view('book.create');
     }
 
     /**
@@ -67,17 +74,22 @@ class BookController extends Controller
      * @bodyParam synopsis string required Example: uma das maiores estrelas de Hollywood, agora a aproximar-se dos 80 anos, decide finalmente contar tudo sobre a sua vida.
      * @bodyParam category string required Example: Romance
      * @bodyParam published_at date required Example: 2017-06-13
-     * @bodyParam quantity_in_stock int required Example: 3
+     * @bodyParam quantity_in_stock int required Example: 2
      * @bodyParam author_id int required Example: 1
      *
-     * @responseFile app/api-documentation/admin/books/create.json
-     * @responseFile 422 app/api-documentation/admin/books/422.json
+     * @responseFile app/api-documentation/admin/books/update.json
      */
-    public function create(BookRequest $request)
+
+    public function store(BookRequest $request)
     {
         $data = $request->validated();
         $book = (new CreateBookAction())->execute($data);
-        return BookResource::make($book);
+        return redirect()->route('books.list');
+    }
+
+    public function edit(Book $book)
+    {
+        return view('book.update', compact("book"));
     }
 
     /**
@@ -101,11 +113,12 @@ class BookController extends Controller
      *
      * @responseFile app/api-documentation/admin/books/update.json
      */
+
     public function update(BookRequest $request, Book $book)
     {
         $data = $request->validated();
         $book = (new UpdateBookAction())->execute($data, $book);
-        return BookResource::make($book);
+        return redirect()->route('books.list');
     }
 
     /**
@@ -122,9 +135,11 @@ class BookController extends Controller
      *
      * @responseFile app/api-documentation/admin/books/delete.json
      */
+
     public function delete(Book $book)
     {
+        $book->loans()->delete();
         $book->delete();
-        return $book;
+        return redirect()->back();
     }
 }

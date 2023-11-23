@@ -152,7 +152,7 @@
                                     if ($parameter->type == 'object') // Skip; individual object children are listed
                                         continue;
                                     if (str_contains($name, "[]"))
-                                        // This likely belongs to an obj-array (eg objs[].a); we only show the parent (objs[]), so skip
+                                        // This likely belongs to an obj-array (eg objs[].a); we only show.blade.php the parent (objs[]), so skip
                                         continue;
                                     if($endpoint->isAuthed() && $metadata['auth']['location'] === 'query'
                                     && $name === $metadata['auth']['name']) continue;
@@ -218,7 +218,7 @@
                                         if ($parameter->type == 'object') // Skip; individual object children are listed
                                             continue;
                                         if (str_contains($name, "[]"))
-                                            // This likely belongs to an obj-array (eg objs[].a); we only show the parent (objs[]), so skip
+                                            // This likely belongs to an obj-array (eg objs[].a); we only show.blade.php the parent (objs[]), so skip
                                             continue;
                                     @endphp
                                     <label aria-hidden="true"

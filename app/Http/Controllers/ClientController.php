@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Actions\Client\CreateClientAction;
 use App\Actions\Client\UpdateClientAction;
 use App\Http\Requests\ClientRequest;
+use App\Http\Resources\BookResource;
 use App\Http\Resources\ClientResource;
+use App\Models\Book;
 use App\Models\User;
 
 class ClientController extends Controller
@@ -29,7 +31,8 @@ class ClientController extends Controller
     {
         $perpage = request()->query('limit', 50);
         $users = User::query()->paginate($perpage);
-        return ClientResource::collection($users);
+        $usersResource = ClientResource::collection($users);
+        return view("user.index", compact("usersResource"));
     }
 
     /**
@@ -44,11 +47,17 @@ class ClientController extends Controller
      * @header Content-Type application/json
      * @header Accept application/json
      *
-     * @responseFile app/api-documentation/admin/clients/show.json
+     * @responseFile app/api-documentation/admin/clients/show.blade.php.json
      */
     public function show(User $user)
     {
-        return ClientResource::make($user);
+        $user = ClientResource::make($user);
+        return view('user.show', compact("user"));
+    }
+
+    public function create()
+    {
+        return view('user.create');
     }
 
     /**
@@ -70,11 +79,16 @@ class ClientController extends Controller
      *
      * @responseFile app/api-documentation/admin/clients/create.json
      */
-    public function create(ClientRequest $request)
+    public function store(ClientRequest $request)
     {
         $data = $request->validated();
         $user = (new CreateClientAction())->execute($data);
-        return ClientResource::make($user);
+        return redirect()->route('clients.list');
+    }
+
+    public function edit(User $user)
+    {
+        return view('user.update', compact("user"));
     }
 
     /**
@@ -100,7 +114,7 @@ class ClientController extends Controller
     {
         $data = $request->validated();
         $user = (new UpdateClientAction())->execute($data, $user);
-        return ClientResource::make($user);
+        return redirect()->route('clients.list');
     }
 
     /**
@@ -120,6 +134,6 @@ class ClientController extends Controller
     public function delete(User $user)
     {
         $user->delete();
-        return $user;
+        return redirect()->back();
     }
 }

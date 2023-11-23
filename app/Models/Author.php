@@ -20,4 +20,9 @@ class Author extends Model
     {
         return $this->hasMany(Book::class, 'author_id', 'id');
     }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

@@ -23,7 +23,6 @@ class ClientRequest extends FormRequest
         if($this->method('PUT') && $this->user) {
             $rules['password'] = ['sometimes', 'string', 'min:6', 'max:255'];
         }
-
         return $rules;
     }
 }

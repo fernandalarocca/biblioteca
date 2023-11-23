@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -19,17 +18,26 @@ class AuthController extends Controller
      *  }
      * @response status=404 scenario="user not authenticated" {"message": "email ou senha incorretos"}
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $data = $request->all();
-        $user = User::query()->where('email', $data['email'])->first();
+        $credentials = $request->validated();
 
-        if (!$user || !Hash::check($data['password'], $user->password)) {
-            return response()->json(['message' => 'email ou senha incorretos'], 401);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect('/');
         }
 
-        $token = $user->createToken('API TOKEN');
+        return back()->withErrors([
+            'username' => 'As credenciais fornecidas não correspondem aos nossos registros.',
+        ]);
+    }
 
-        return response()->json(['token' => $token->plainTextToken], 200);
+    public function showLogin()
+    {
+        $credentials = ['email' => 'admin@email.com', 'password' => '12345678'];
+
+        Auth::attempt($credentials);
+        return view("auth.login-form");
     }
 }

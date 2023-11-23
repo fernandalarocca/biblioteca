@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Book\UpdateBookQuantityInStockAction;
 use App\Actions\Loan\CreateLoanAction;
+use App\Actions\Loan\UpdateLoanAction;
 use App\Http\Requests\LoanRequest;
 use App\Http\Resources\LoanResource;
 use App\Models\Book;
@@ -30,7 +31,8 @@ class LoanController extends Controller
     {
         $perpage = request()->query('limit', 5);
         $loans = Loan::query()->paginate($perpage);
-        return LoanResource::collection($loans);
+        $loansResource = LoanResource::collection($loans);
+        return view("loan.index", compact("loansResource"));
     }
 
     /**
@@ -45,11 +47,17 @@ class LoanController extends Controller
      * @header Content-Type application/json
      * @header Accept application/json
      *
-     * @responseFile app/api-documentation/admin/loans/show.json
+     * @responseFile app/api-documentation/admin/loans/show.blade.php.json
      */
     public function show(Loan $loan)
     {
-        return LoanResource::make($loan);
+        $loan = LoanResource::make($loan);
+        return view('loan.show', compact("loan"));
+    }
+
+    public function create()
+    {
+        return view('loan.create');
     }
 
     /**
@@ -70,7 +78,7 @@ class LoanController extends Controller
      *
      * @responseFile app/api-documentation/admin/loans/create.json
      */
-    public function create(LoanRequest $request)
+    public function store(LoanRequest $request)
     {
         $data = $request->validated();
         $loan = (new CreateLoanAction())->execute($data);
@@ -79,7 +87,12 @@ class LoanController extends Controller
         (new UpdateBookQuantityInStockAction())
             ->execute($book, data_get($data,'quantity', 1));
 
-        return LoanResource::make($loan);
+        return redirect()->route('loans.list');
+    }
+
+    public function edit(Loan $loan)
+    {
+        return view('loan.update', compact("loan"));
     }
 
     /**
@@ -103,8 +116,8 @@ class LoanController extends Controller
     public function update(LoanRequest $request, Loan $loan)
     {
         $data = $request->validated();
-        $loan->update($data);
-        return LoanResource::make($loan);
+        $loan = (new UpdateLoanAction())->execute($data, $loan);
+        return redirect()->route('loans.list');
     }
 
     /**
@@ -124,6 +137,6 @@ class LoanController extends Controller
     public function delete(Loan $loan)
     {
         $loan->delete();
-        return $loan;
+        return redirect()->back();
     }
 }
